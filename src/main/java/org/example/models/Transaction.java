@@ -1,11 +1,13 @@
 package org.example.models;
 
+import lombok.Getter;
 import org.example.services.TransactionService;
 
 import java.io.Serializable;
 import java.util.Date;
 
 public class Transaction implements TransactionService {
+    @Getter
     private Date date;
     private double amount;
     private String category;
