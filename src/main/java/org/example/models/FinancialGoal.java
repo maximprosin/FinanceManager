@@ -1,6 +1,8 @@
 package org.example.models;
 
-public class FinancialGoal {
+import org.example.services.FinancialGoalService;
+
+public class FinancialGoal implements FinancialGoalService {
     private String goalName;
     private double targetAmount;
     private double currentAmount;
@@ -9,5 +11,10 @@ public class FinancialGoal {
         this.goalName = goalName;
         this.targetAmount = targetAmount;
         this.currentAmount = currentAmount;
+    }
+
+    @Override
+    public void updateProcess(double progress) {
+        currentAmount += progress;
     }
 }
