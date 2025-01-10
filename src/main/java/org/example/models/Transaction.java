@@ -1,8 +1,11 @@
 package org.example.models;
 
+import org.example.services.TransactionService;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Transaction {
+public class Transaction implements TransactionService {
     private Date date;
     private double amount;
     private String category;
@@ -13,5 +16,9 @@ public class Transaction {
         this.amount = amount;
         this.category = category;
         this.description = description;
+    }
+
+    public String getDetails() {
+        return "Date: " + date + "\nAmount: " + amount + "\nCategory: " + category + "\nDescription: " + description;
     }
 }
