@@ -18,6 +18,7 @@ public class Transaction implements TransactionService {
         this.description = description;
     }
 
+    @Override
     public String getDetails() {
         return "Date: " + date + "\nAmount: " + amount + "\nCategory: " + category + "\nDescription: " + description;
     }
