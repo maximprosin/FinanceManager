@@ -15,7 +15,7 @@ public class FinanceManager implements FinanceManagerService {
 
     public FinanceManager() {
         this.users = new ArrayList<>();
-        loadData(); // Загружаем данные при инициализации
+        loadData();
     }
 
     @Override
@@ -26,18 +26,17 @@ public class FinanceManager implements FinanceManagerService {
             }
         }
         users.add(user);
-        saveData(); // Сохраняем данные в файл после добавления нового пользователя
+        saveData();
     }
 
     @Override
     public User login(String username, String password) {
-        // Метод loadData уже вызывается в конструкторе, поэтому здесь мы просто проверяем список
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return user; // Возвращаем пользователя при успешном входе
+                return user;
             }
         }
-        return null; // Если пользователь не найден или пароль неверный
+        return null;
     }
 
     @Override
@@ -54,6 +53,17 @@ public class FinanceManager implements FinanceManagerService {
 
     @Override
     public void loadData() {
+        File file = new File(FILE_NAME);
+        if (!file.exists()) {
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                logger.info("Файл {} был создан.", FILE_NAME);
+            } catch (IOException e) {
+                logger.error("Не удалось создать файл: ", e);
+                return;
+            }
+        }
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -61,7 +71,7 @@ public class FinanceManager implements FinanceManagerService {
                 if (parts.length == 2) {
                     String username = parts[0];
                     String password = parts[1];
-                    users.add(new User(username, password)); // Добавляем пользователя в список
+                    users.add(new User(username, password));
                 }
             }
         } catch (IOException e) {

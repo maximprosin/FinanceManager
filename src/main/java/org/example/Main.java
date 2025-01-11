@@ -1,7 +1,10 @@
 package org.example;
 
+import org.example.models.FinanceApp;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        FinanceApp app = new FinanceApp();
+        app.start();
     }
 }
