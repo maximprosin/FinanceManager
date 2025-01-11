@@ -1,5 +1,6 @@
 package org.example.models;
 
+import lombok.Getter;
 import org.example.services.UserService;
 
 import java.util.ArrayList;
@@ -7,8 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 public class User implements UserService {
-    private String username;
-    private String password;
+    @Getter private String username;
+    @Getter private String password;
     private List<Transaction> transactions;
     private List<String> categories;
     private List<FinancialGoal> financialGoals;
